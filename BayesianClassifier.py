@@ -325,9 +325,9 @@ class SampleData:
                     if len(self.boundary_function)>1:
                         self.df = self.df.sort_values(by='x1')
                         labels=['Decision Boundary', '']
-                        [p.ax_joint.plot(self.df.x1, self.boundary_function[i](self.df.x1), lw=1, color='k', label=labels[i]) for i in range(len(self.boundary_function))]
+                        [p.ax_joint.plot(self.df.x1.sort_values(ascending=True), self.boundary_function[i](self.df.x1.sort_values(ascending=True)), lw=1, color='k', label=labels[i]) for i in range(len(self.boundary_function))]
                 except TypeError:
-                       p.ax_joint.plot(self.df.x1, self.boundary_function(self.df.x1), lw=1, color='k', label='Decision Boundary')
+                       p.ax_joint.plot(self.df.x1.sort_values(), self.boundary_function(self.df.x1.sort_values()), lw=1, color='k', label='Decision Boundary')
             
             for axes in p.ax_joint.get_shared_y_axes():
                 for ax in axes:
@@ -379,7 +379,7 @@ class SampleData:
                         labels=['Decision Boundary', '']
                         [ax.plot(self.df.x1, self.boundary_function[i](self.df.x1), lw=1, color='k', label=labels[i]) for i in range(len(self.boundary_function))]
                 except TypeError:
-                       ax.plot(self.df.x1, self.boundary_function(self.df.x1), lw=1, color='k', label='Decision Boundary')
+                       ax.plot(self.df.x1.sort_values(), self.boundary_function(self.df.x1.sort_values()), lw=1, color='k', label='Decision Boundary')
 
             ax.set_aspect(1.0/ax.get_data_ratio(), adjustable='box')
             ax.set_ylabel('x2')
