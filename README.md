@@ -82,7 +82,6 @@ In the case of sample set B, the covariance matrices are not equal. Since $\Sigm
 ```math
 \begin{equation}
     g_i(\textbf{x})=\textbf{x}^T\textbf{W}_i\textbf{x} + \textbf{w}_i^T\textbf{x}+w_{i0}
-    \label{caseIII}
 \end{equation}
 ```
 ```math
