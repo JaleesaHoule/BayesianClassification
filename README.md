@@ -25,7 +25,6 @@ Then, taking the natural log of this equation gives
 ```math
 \begin{equation}
     g_i(\textbf{x}) = ln(p(\textbf{x}|\omega_i)) + ln(P(w_i)).
-    \label{log_discriminant}
 \end{equation}
 ```
 This manipulation makes $g_i(\textbf{x})$ a monotonically increasing function, which helps to simplify the classification process. For this project, we are asked to classify two categories of data. Thus, a dichotomizer can be used to classify the data, and can be defined as:
@@ -69,7 +68,7 @@ By expanding and further simplifying this equation, we can see that the discrimi
     g_i(\textbf{x}) =\textbf{w}_i^T\textbf{x}+w_{i0} \\
 \end{equation}
 ```
-          where: 
+where: 
 ```math          
 \begin{equation}
  \textbf{w}_i=\frac{1}{\sigma^2}\mu_i, \text{w}_{i0}=\frac{-1}{2\sigma^2}\mu_i^T\mu_i+ln(P(\omega_i)). \\
@@ -90,7 +89,7 @@ In the case of sample set B, the covariance matrices are not equal. Since $\Sigm
 \end{equation}
 ```
 ```math
-          where: 
+where: 
 \begin{equation}
 \textbf{W}_i=-\frac{1}{2}\Sigma_i^{-1}, \textbf{w}_i=\Sigma_i^{-1}\mu_i, \text{  and  } \text{w}_{i0}=-\frac{1}{2}\mu_i^T\Sigma_i^{-1}\mu_i-\frac{1}{2}ln(|\Sigma_i|)+ln(P(w_i)).
 \end{equation}
