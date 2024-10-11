@@ -31,7 +31,6 @@ This manipulation makes $g_i(\textbf{x})$ a monotonically increasing function, w
 ```math
 \begin{equation}
     g(\textbf{x}) = g_1(\textbf{x}) - g_2(\textbf{x}).
-    \label{dichotomizer}
 \end{equation}
 ```
 In this case, we will choose $\omega_1$ if $g(\textbf{x})>0$ and $\omega_2$ if $g(\textbf{x})<0$. The corresponding decision boundary for the two categories can be found by setting $g_1(\textbf{x}) = g_2(\textbf{x})$.
@@ -40,17 +39,15 @@ Now, if we assume $p(\textbf{x}|\omega_j) \sim N(\mu_i,\Sigma_i)$, we can substi
 ```math
 \begin{equation}
     N(\mu,\Sigma) = \frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}}exp[-\frac{1}{2}(\textbf{x}-\mu)^T\Sigma^{-1}(\textbf{x}-\mu)] \text{, } \textbf{x} \in R^d .
-    \label{pdf_normal}
 \end{equation}
 ```
 Substituting this expression into Equation \ref{log_discriminant} gives the discriminant function:
 ```math
 \begin{equation}
     g_i(\textbf{x}) = -\frac{1}{2}(\textbf{x}-\mu_i)^T\Sigma_i^{-1}(\textbf{x}-\mu_i) - \frac{d}{2}ln(2\pi)-\frac{1}{2}ln(|\Sigma_i|)+ln(P(\omega_i)).
-    \label{general_g_i}
 \end{equation}
 ```
-Equation \ref{general_g_i} is the general discriminant function used for multivariate Gaussian data, and is what will be used to classify the data generated in this assignment. As discussed in class, there are 3 different scenarios in which Equation \ref{general_g_i} can be further discussed: case I ($\Sigma_i = \sigma^2I$ for each $w_i$), case II ($\Sigma_i = \Sigma$ for each $\omega_i$), and case III ($\Sigma_i =$ arbitrary for each $\omega_i$). 
+This equation is the general discriminant function used for multivariate Gaussian data, and is what will be used to classify the data generated in this assignment. As discussed in class, there are 3 different scenarios in which this equation can be further discussed: case I ($\Sigma_i = \sigma^2I$ for each $w_i$), case II ($\Sigma_i = \Sigma$ for each $\omega_i$), and case III ($\Sigma_i =$ arbitrary for each $\omega_i$). 
 
 ## Classifier design based on case I parameters
 
@@ -127,7 +124,6 @@ The theoretical probability error is often determined using the Bhattacharyya er
 ```math
 \begin{equation}
     P(error) \leq P^{\beta}(\omega_1)P^{1-\beta}(\omega_2)e^{-k(\beta)}
-    \label{BhattaBound}
 \end{equation}
 ```
 where
