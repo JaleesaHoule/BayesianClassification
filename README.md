@@ -79,9 +79,44 @@ For the data in sample set A, $\Sigma_1 = \Sigma_2 = \sigma^2$. Therefore, the c
 
 By calculating the values of $w_i$ and $w_{i0}$ for each given [$\mu_i$, $\Sigma_i$] in sample set A, we can construct two discriminant functions ($g_1(x)$ and $g_2(x)$) for each dataset. Then, we can set those two functions equal to each other in order to determine the decision boundary and classify the samples.\\
 
+## Classifier design based on case III parameters
+
+In the case of sample set B, the covariance matrices are not equal. Since $\Sigma_1 \neq \Sigma_2$ and all features in $\omega_2$ do not have the same variance, this data can not be classified using the discriminant found in case I. Instead, the optimum classifier for this data will be case III, which yields a quadratic discriminant function. By rewriting the general equation above and ignoring the constant $\frac{d}{2}ln(2\pi)$, the discriminant for case III can be written as
+
+```math
+\begin{equation}
+    g_i(\textbf{x})=\textbf{x}^T\textbf{W}_i\textbf{x} + \textbf{w}_i^T\textbf{x}+w_{i0}
+    \label{caseIII}
+\end{equation}
+```
+```math
+          where: 
+\begin{equation}
+\textbf{W}_i=-\frac{1}{2}\Sigma_i^{-1}, \textbf{w}_i=\Sigma_i^{-1}\mu_i, \text{  and  } \text{w}_{i0}=-\frac{1}{2}\mu_i^T\Sigma_i^{-1}\mu_i-\frac{1}{2}ln(|\Sigma_i|)+ln(P(w_i)).
+\end{equation}
+```
+It can be noted that for case III, we no longer make the assumption that the features are uncorrelated (i.e., the covariance matrices do not need to be diagonal). This is also true for case II, though we will not discuss case II any further since neither the data from sample set A or B fall into this category. For dataset B, the priors, misclassification rates, and probability of error will be computed the same way as is described in Part 1 above. 
+
+
 ## Estimating prior probabilities
 
 For both sample set A and B, we are given the instruction to produce n samples from $\omega_1$ and m samples from $\omega_2$. We can use these numbers to determine the priors as $P(w_1)= \frac{n}{n+m}$ and $P(\omega_2)= \frac{m}{n+m}$. However, if we did not have an idea of how many samples came from each class, we could instead choose to estimate priors by them equal to each other (which may or may not be a valid assumption). 
+
+
+## Euclidean distance classifier theory and assumptions
+
+In the case that $\Sigma_i=\sigma^2I$ for all $\omega_i$ and $P(\omega_i)=P(\omega_j)$ for $i\neq j$, the discriminant function found above can be further simplified to what is known as the Euclidean distance classifier. In this case, $g_i(\textbf{x})$ can be described as:
+
+```math
+\begin{equation}
+\begin{aligned}
+     g_i(\textbf{x}) &= - ||\textbf{x} -\mu_i||^2 \\
+     &= - (\textbf{x}-\mu_i)^T(\textbf{x}-\mu_i). \\
+\end{aligned}
+\end{equation}
+```
+For this to be an optimum classifier (i.e., error is minimized), all priors must be equal, and the covariance matrices for all $\omega_i$ must satisfy $\Sigma_i=\sigma^2I$. As is true for cases I, II, and III, the assumption that all features are normally distributed must also hold true for the Euclidean distance classifier to be optimum.
+
 
 ## Determining misclassification rates
 
@@ -105,38 +140,6 @@ where
 For the Bhattacharyya error bound, $\beta$ is set to 0.5, as opposed to the Chernoff error bound, which finds the $\beta$ which minimizes the equation above. The probability of error found using the Bhattacharyya bound will never be the most accurate error bound due to the looser approximation of $\beta$, therefore the true error rate is expected to be less than or equal to the probability of error estimated through the Bhattacharyya error bound. 
 
 
-## Classifier design based on case III parameters}
-
-In the case of sample set B, the covariance matrices are not equal. Since $\Sigma_1 \neq \Sigma_2$ and all features in $\omega_2$ do not have the same variance, this data can not be classified using the discriminant found in case I. Instead, the optimum classifier for this data will be case III, which yields a quadratic discriminant function. By rewriting the general equation above and ignoring the constant $\frac{d}{2}ln(2\pi)$, the discriminant for case III can be written as
-
-```math
-\begin{equation}
-    g_i(\textbf{x})=\textbf{x}^T\textbf{W}_i\textbf{x} + \textbf{w}_i^T\textbf{x}+w_{i0}
-    \label{caseIII}
-\end{equation}
-```
-```math
-          where: 
-\begin{equation}
-\textbf{W}_i=-\frac{1}{2}\Sigma_i^{-1}, \textbf{w}_i=\Sigma_i^{-1}\mu_i, \text{  and  } \text{w}_{i0}=-\frac{1}{2}\mu_i^T\Sigma_i^{-1}\mu_i-\frac{1}{2}ln(|\Sigma_i|)+ln(P(w_i)).
-\end{equation}
-```
-It can be noted that for case III, we no longer make the assumption that the features are uncorrelated (i.e., the covariance matrices do not need to be diagonal). This is also true for case II, though we will not discuss case II any further since neither the data from sample set A or B fall into this category. For dataset B, the priors, misclassification rates, and probability of error will be computed the same way as is described in Part 1 above. 
-
-
-## Euclidean distance classifier theory and assumptions
-
-In the case that $\Sigma_i=\sigma^2I$ for all $\omega_i$ and $P(\omega_i)=P(\omega_j)$ for $i\neq j$, the discriminant function found above (Equation 7) can be further simplified to what is known as the Euclidean distance classifier. In this case, $g_i(\textbf{x})$ can be described as:
-
-```math
-\begin{equation}
-\begin{aligned}
-     g_i(\textbf{x}) &= - ||\textbf{x} -\mu_i||^2 \\
-     &= - (\textbf{x}-\mu_i)^T(\textbf{x}-\mu_i). \\
-\end{aligned}
-\end{equation}
-```
-For this to be an optimum classifier (i.e., error is minimized), all priors must be equal, and the covariance matrices for all $\omega_i$ must satisfy $\Sigma_i=\sigma^2I$. As is true for cases I, II, and III, the assumption that all features are normally distributed must also hold true for the Euclidean distance classifier to be optimum.
 
 
 
